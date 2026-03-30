@@ -9,27 +9,48 @@
   --border:      #e5e7eb;
   --card-bg:     #ffffff;
   --font:        'Segoe UI', system-ui, -apple-system, sans-serif;
-  --max-width:   1100px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font);
   line-height: 1.6;
 }
 
-/* ── Header ── */
+/* ── Logo hero banner — 100% width, 50vh tall ── */
+.logo-container {
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+  display: block;
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ── Header text section ── */
 .site-header {
   background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
   color: #fff;
-  padding: 3.5rem 1rem 3rem;
   text-align: center;
+  width: 100%;
 }
 
-.header-inner { max-width: var(--max-width); margin: 0 auto; }
+.header-inner {
+  padding: 2.5rem 1rem 3rem;
+  width: 100%;
+}
 
 .logo {
   font-size: 2rem;
@@ -38,25 +59,32 @@ body {
   margin-bottom: .5rem;
 }
 
+.main-heading {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: .5rem;
+}
+
 .tagline {
   font-size: 1.0625rem;
   opacity: .85;
 }
 
-/* ── Blog grid ── */
+/* ── Main content — full width with inner padding ── */
 .main-content {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 3rem 1rem 4rem;
+  width: 100%;
+  padding: 3rem 1.25rem 4rem;
 }
 
+/* ── Blog grid ── */
 .blog-grid {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.75rem;
 }
 
-/* ── Card ── */
+/* ── Blog card ── */
 .blog-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -83,80 +111,73 @@ body {
   display: inline-block;
   background: var(--accent-light);
   color: var(--accent);
-  font-size: 0.72rem;
-  font-weight: 700;
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: .07em;
-  padding: .18rem .6rem;
+  letter-spacing: .06em;
+  padding: .2rem .65rem;
   border-radius: 999px;
-  margin-bottom: .9rem;
-  align-self: flex-start;
+  margin-bottom: .75rem;
 }
 
 .card-title {
-  font-size: 1.15rem;
+  font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.35;
-  margin-bottom: .75rem;
-  color: var(--fg);
+  margin-bottom: .6rem;
 }
 
 .card-title a {
-  color: inherit;
+  color: var(--fg);
   text-decoration: none;
 }
-.card-title a:hover { color: var(--accent); }
+
+.card-title a:hover {
+  color: var(--accent);
+}
 
 .card-excerpt {
   color: var(--muted);
   font-size: .9rem;
+  line-height: 1.6;
   flex: 1;
   margin-bottom: 1.25rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .card-footer {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: .8125rem;
+  justify-content: space-between;
+  font-size: .85rem;
   color: var(--muted);
 }
 
 .read-btn {
-  background: var(--accent);
-  color: #fff;
-  text-decoration: none;
-  padding: .35rem .85rem;
-  border-radius: 8px;
-  font-size: .8125rem;
+  color: var(--accent);
   font-weight: 600;
-  transition: background .2s;
+  text-decoration: none;
 }
-.read-btn:hover { background: #4338ca; }
 
-/* ── Empty state ── */
-.empty-state {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 4rem 1rem;
-  color: var(--muted);
-}
-.empty-state p { font-size: 1.1rem; }
+.read-btn:hover { text-decoration: underline; }
 
 /* ── Footer ── */
 .page-footer {
+  width: 100%;
   text-align: center;
-  padding: 1.5rem;
-  color: var(--muted);
-  font-size: .85rem;
+  padding: 1.5rem 1rem;
   border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .875rem;
+}
+
+/* ── Responsive breakpoints ── */
+@media (max-width: 1024px) {
+  .blog-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
 }
 
 @media (max-width: 640px) {
   .blog-grid { grid-template-columns: 1fr; }
   .logo { font-size: 1.6rem; }
+  .logo-container { height: 50vh; }   /* keep half-screen on mobile too */
+  .card-footer { flex-direction: column; align-items: flex-start; gap: .5rem; }
 }
